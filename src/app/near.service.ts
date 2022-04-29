@@ -72,7 +72,7 @@ export class NearService {
   }
 }
 
-const CONTRACT: string = "dev-1651248842032-40689950042401"
+const CONTRACT: string = "dev-1651249761353-63465678167713"
 
 let config: ConnectConfig = {
   networkId: "testnet",
