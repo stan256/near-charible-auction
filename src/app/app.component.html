@@ -1,18 +1,17 @@
 <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 
   <div class="content">
-    <div class="header">
-      <div>
-        <h5>Charitable Auction</h5>
-        <p>All funding will be spend on a good things</p>
-      </div>
-      <span *ngIf="authenticated()">
+    <div *ngIf="authenticated()">
+      <div class="header">
+        <div>
+          <h5>Charitable Auction</h5>
+          <p>All funding will be spend on a good things</p>
+        </div>
+        <span>
         <button class="btn btn-success mr-20" (click)="openNewLotModal('create-new-lot')">Add new lot</button>
         <button class="btn btn-primary" (click)="signOut()">Sign Out</button>
       </span>
-    </div>
-
-    <div *ngIf="authenticated()">
+      </div>
       <div class="dashboard">
 
         <div class="item" *ngFor="let l of lots">

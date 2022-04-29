@@ -1,8 +1,8 @@
-import {Context, u128, PersistentVector, ContractPromiseBatch} from "near-sdk-as";
+import {Context, u128, PersistentVector, ContractPromiseBatch, storage} from "near-sdk-as";
 
 @nearBindgen
 export class Lot {
-  id: u64;
+  id: u128;
   title: string;
   description: string;
   last_price: u128;
@@ -11,11 +11,10 @@ export class Lot {
   creator: string;
   active_until: u64;
 
-  static counter: u64 = 0
   static one_week_in_nanos: u64 = 1000000000 * 60 * 60 * 24 * 7
 
-  constructor(title: string, description: string, img_link: string, last_price: u128) {
-    this.id = Lot.counter++;
+  constructor(id: u128, title: string, description: string, img_link: string, last_price: u128) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.last_price = last_price;
@@ -27,8 +26,10 @@ export class Lot {
 }
 
 export function createLot(title: string, description: string, img_link: string, last_price: u128): void {
+  const counter: u128 = storage.get<u128>("counter", u128.fromString("0"))!
   assert(last_price > u128.from(0), "Price should be positive")
-  lots.push(new Lot(title, description, img_link, last_price))
+  lots.push(new Lot(counter, title, description, img_link, last_price))
+  storage.set<u128>("counter", counter.postInc())
 }
 
 export function getLots(): Lot[] {

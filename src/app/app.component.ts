@@ -29,7 +29,10 @@ export class AppComponent implements OnInit {
   }
 
   initLots() {
-      this.near.getLots().then(lots => this.lots = lots)
+      this.near.getLots().then(lots => {
+        console.log(lots)
+        this.lots = lots
+      })
   }
 
   openNewLotModal(id: string) {
@@ -37,6 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   openNewBidModal(id: string, currentLot: number) {
+    console.log(currentLot)
     this.currentLot = currentLot;
     this.currentLotMinPrice = formatNearAmount(this.lots[currentLot].last_price.toString())!;
     this.modals.open(id);

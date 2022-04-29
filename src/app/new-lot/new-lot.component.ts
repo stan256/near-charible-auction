@@ -11,10 +11,14 @@ import {parseNearAmount} from "near-api-js/lib/utils/format";
 export class NewLotComponent implements OnInit {
   title: string | undefined
   description: string | undefined
-  startingPrice: number = 0
+  startingPrice: number = 0.05
   fileToUpload: FileList | null = null
   finished: boolean = false
   loading: boolean = false
+
+  somethingEmpty(): boolean {
+    return !this.title || !this.description || !this.fileToUpload
+  }
 
   constructor(private ipfs: StorageService,
               private near: NearService) {
@@ -53,5 +57,4 @@ export class NewLotComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
 }
