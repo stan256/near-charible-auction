@@ -1,0 +1,90 @@
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.mb50 {
+  margin-bottom: 50px;
+}
+
+.mb100 {
+  margin-bottom: 100px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.new-bid-btn {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.dashboard {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+
+  .item {
+    width: calc(33.3% - 20px);
+    background-color: #b8b0b0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-right: 20px;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    p {
+      margin-bottom: 0;
+
+      &.last-bid {
+        margin-bottom: 20px;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}

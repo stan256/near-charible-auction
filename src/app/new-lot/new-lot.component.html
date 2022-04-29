@@ -1,0 +1,27 @@
+<div *ngIf="!finished && !loading">
+  <h1>New lot info:</h1>
+  <label><input type="text" name="name" [(ngModel)]="title"> Lot name</label><br>
+  <label><input type="text" name="description" [(ngModel)]="description"> Lot description</label><br>
+  <label>
+    <input
+      autoComplete="off"
+      defaultValue='0'
+      id="donation"
+      [(ngModel)]="startingPrice"
+      min="0"
+      step="0.05"
+      type="number"
+    /> Starting price (in NEAR)
+  </label><br>
+  <label><input type="file" (change)="handleFileInput($event)" accept="image/gif, image/jpeg, image/png"> Choose a picture</label><br>
+  <button (click)="save()">Add new lot</button>
+</div>
+<div *ngIf="loading">
+  Creating new lot, please wait...
+</div>
+<div *ngIf="finished" class="text-center">
+  <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Icons8_flat_ok.svg/1200px-Icons8_flat_ok.svg.png" alt="ok">
+  <p>Thanks, your lot has been successfully saved. The bids period end is in a week.</p>
+</div>
+
+

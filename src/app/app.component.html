@@ -1,0 +1,73 @@
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+
+  <div class="content">
+    <div class="header">
+      <div>
+        <h5>Charitable Auction</h5>
+        <p>All funding will be spend on a good things</p>
+      </div>
+      <span *ngIf="authenticated()">
+        <button class="btn btn-success mr-20" (click)="openNewLotModal('create-new-lot')">Add new lot</button>
+        <button class="btn btn-primary" (click)="signOut()">Sign Out</button>
+      </span>
+    </div>
+
+    <div *ngIf="authenticated()">
+      <div class="dashboard">
+
+        <div class="item" *ngFor="let l of lots">
+          <h5 class="title">{{l.title}}</h5>
+          <img src="{{l.img_link}}" alt="bla">
+          <p class="description"><span class="bold">Description:</span> <br>{{l.description}}</p>
+          <p class="auction-end"><span class="bold">Auction's end:</span> {{toDate(l.active_until)}}</p>
+          <p class="current-bid-owner" *ngIf="l.creator != l.owner"><span class="bold">Current max bid made by:</span> {{l.owner}}</p>
+          <p class="current-bid-owner"><span class="bold">Lot owner: </span> {{l.creator}}</p>
+          <p class="last-bid"><span class="bold">Current price:</span> {{formatPrice(l.last_price)}} NEAR</p>
+          <p class="text-center">
+            <span *ngIf="myBid(l) && !owner(l)">Already my bid</span><br>
+            <span *ngIf="owner(l)"><span class="bold">My lot</span></span><br>
+
+            <button
+              *ngIf="!owner(l)"
+              [disabled]="myBid(l)"
+              (click)="openNewBidModal('make-bid', l.id)"
+              class="btn btn-primary">Make a bid
+            </button>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="!authenticated()" class="text-center">
+      <h3>Please, sign in using your Near wallet</h3>
+      <button (click)="signIn()" class="btn btn-primary">Sign in with Near Wallet</button>
+    </div>
+  </div>
+</div>
+
+
+<jw-modal id="make-bid">
+  <div *ngIf="loading" class="text-center">
+    Making a bid...
+  </div>
+  <div *ngIf="!loading">
+    <label>
+      <input
+        autoComplete="off"
+        [value]="currentLotMinPrice"
+        [min]="currentLotMinPrice"
+        step="0.05"
+        type="number"
+        #bidinput
+      /> New price (in NEAR)
+    </label>
+    <button (click)="makeNewBid(bidinput.value)" class="btn btn-success new-bid-btn">Make a new bid</button>
+    <button (click)="closeModal('make-bid')" class="btn btn-primary">Close</button>
+  </div>
+</jw-modal>
+
+<jw-modal id="create-new-lot">
+  <app-new-lot></app-new-lot>
+  <button (click)="closeModal('create-new-lot')">Close</button>
+</jw-modal>
