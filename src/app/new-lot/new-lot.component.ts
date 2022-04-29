@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../storage.service";
 import {NearService} from "../near.service";
-import Decimal from "decimal.js";
-import {formatNearAmount, parseNearAmount} from "near-api-js/lib/utils/format";
+import {parseNearAmount} from "near-api-js/lib/utils/format";
 
 @Component({
   selector: 'app-new-lot',
