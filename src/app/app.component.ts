@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   private currentLot: number | undefined = undefined
   loading = false
 
-  currentLotMinPrice: string = '0.05'
+  currentLotMinPrice: number = 0.05
   lots: Lot[] = []
 
   async ngOnInit() {
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   openNewBidModal(id: string, currentLot: number) {
     console.log(currentLot)
     this.currentLot = currentLot;
-    this.currentLotMinPrice = formatNearAmount(this.lots[currentLot].last_price.toString())!;
+    this.currentLotMinPrice = Number(formatNearAmount(this.lots[currentLot].last_price.toString())!) + 0.05 ;
     this.modals.open(id);
   }
 
